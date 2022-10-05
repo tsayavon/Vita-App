@@ -40,3 +40,4 @@ As a user:
 
 ## Future Enhancements
 - See a list of all photo's uploaded by a user
+
