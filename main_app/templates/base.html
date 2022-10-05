@@ -22,7 +22,7 @@
   <body>
     <header class="navbar-fixed">
       <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper blue lighten-1">
             <ul>
                 <li>
                     <a href="{% url 'home' %}" class="left brand-logo">Vita</a>
@@ -31,7 +31,10 @@
           <ul class="right">
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'posts_create' %}">Add a Post</a></li>
-            <li><a href="{% url 'index' %}">View All My Posts</a></li>
+            <li><a href="{% url 'index' %}">Gallery</a></li>
+            <li><a href="/categories">Categories</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/login">Login</a></li>
           </ul>
         </div>
       </nav>
@@ -41,7 +44,7 @@
         
         {% endblock %}
     </main>
-    <footer class="page-footer">
+    <footer class="page-footer blue lighten-1">
       <div class="right">
         All Rights Reserved, © 2022 Vita  
       </div>
