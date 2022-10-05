@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from unicodedata import category
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Post
+from .forms import CategoryForm
 
 
 # Create your views here.
@@ -17,7 +19,19 @@ def posts_index(request):
 
 def posts_detail(request, post_id):
   post = Post.objects.get(id=post_id)
-  return render(request, 'posts/detail.html', { 'post': post })
+  category_form = CategoryForm()
+  return render(request, 'posts/detail.html', {
+     'post': post, 'category_form': category_form 
+     })
+
+def add_category(request, post_id):
+    form = CategoryForm(request.POST)
+
+    if form.is_valid():
+       new_category = form.save(commit=False)
+       new_category.post_id = post_id
+       new_category.save()
+    return redirect('detail', post_id=post_id)
 
 class PostCreate(CreateView):
   model = Post
