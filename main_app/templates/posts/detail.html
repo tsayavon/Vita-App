@@ -8,6 +8,10 @@
     <p>Location: {{ post.location }}</p>
     <p>Description: {{ post.description }}</p>
   </div>
+  <div class="card-action">
+    <a href="{% url 'posts_update' post.id %}">Edit</a>
+    <a href="{% url 'posts_delete' post.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}
