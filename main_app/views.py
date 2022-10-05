@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Post
 
 
@@ -17,4 +18,9 @@ def posts_index(request):
 def posts_detail(request, post_id):
   post = Post.objects.get(id=post_id)
   return render(request, 'posts/detail.html', { 'post': post })
+
+class PostCreate(CreateView):
+  model = Post
+  fields = ('title', 'location', 'description')
+  success_url = '/posts/'
 
