@@ -5,11 +5,31 @@
 <h1>Add Post</h1>
 {% endif %}
 
-<form action="" method="post">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Submit!" class="btn" />
-</form>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="row gx-4 gx-lg-5 align-items-center">
+      <div class="col-sm-6 px-0 d-none d-sm-block">
+        <img
+          src="https://i.imgur.com/6Axz3Hw.png"
+          alt="black border photo collage"
+          class="w-100 h-100"
+          style="object-fit: cover; object-position: left"
+        />
+      </div>
+      <div class="col-md-6">
+        <div
+          class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-2 pt-5 pt-xl-0 mt-xl-n5"
+        >
+        <form action="" method="post">
+          {% csrf_token %}
+          <table>
+            {{ form.as_table }}
+          </table>
+          <input type="submit" value="Submit" class="btn" />
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
