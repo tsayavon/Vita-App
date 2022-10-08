@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Poiret+One&family=Rubik:wght@300;500&display=swap');
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -13,6 +16,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>{{ page_name }} | Vita</title>
+    
    
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -20,12 +24,17 @@
 
   </head>
   <body>
-    <header class="navbar-fixed">
+    <header class="navbar-fix" >
       <nav>
         <div class="nav-wrapper blue lighten-1">
             <ul>
                 <li>
-                    <a href="{% url 'home' %}" class="left brand-logo">Vita</a>
+                    <!--<a href="{% url 'home' %}" class="left brand-logo">Vita</a>-->
+                    <div class='nav-brand'> 
+                      <a href="{% url 'home' %}"> 
+                        <img src='https://i.imgur.com/d7pHknq.png' alt='Official logo' height="60px" width="150"> 
+                      </a> 
+                     </div>  
                 </li>
             </ul>
           <ul class="right">
@@ -33,7 +42,7 @@
             {% if user.is_authenticated %}
             <li><a href="{% url 'posts_create' %}">Add a Post</a></li>
             <li><a href="{% url 'index' %}">Gallery</a></li>
-            <li><a href="/categories">Categories</a></li>
+            <!--<li><a href="/categories">Categories</a></li>-->
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
