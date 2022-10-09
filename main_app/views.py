@@ -1,11 +1,10 @@
-from unicodedata import category
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post
+from .models import Post, Category
 from .forms import CategoryForm
 
 
@@ -20,7 +19,8 @@ def about(request):
 @login_required
 def posts_index(request):
   posts = Post.objects.filter(user=request.user)
-  return render(request, 'posts/index.html', { 'posts': posts })
+  categorys = Category.objects.all()
+  return render(request, 'posts/index.html', { 'posts': posts, 'categorys': categorys })
 
 @login_required
 def posts_detail(request, post_id):
