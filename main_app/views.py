@@ -1,11 +1,19 @@
+from urllib import response
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Post, Category
+
+import uuid
+import boto3
+
+from .models import Post, Category, Photo
 from .forms import CategoryForm
+
+S3_BASE_URL = 'https://s3.us-west-1.amazonaws.com/'
+BUCKET = 'vitaapp'
 
 
 # Create your views here.
@@ -54,13 +62,48 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+def add_photo(request, post_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f'{S3_BASE_URL}{BUCKET}/{key}'
+      photo = Photo(url=url, post_id=post_id)
+      photo.save()
+    except Exception as error:
+      print('An error occured uploading an image')
+      print(error)
+  return redirect('detail', post_id=post_id)
+
 class PostCreate(LoginRequiredMixin, CreateView):
   model = Post
   fields = ('title', 'location', 'description')
   
   def form_valid(self, form):
-    form.instance.user = self.request.user  
-    return super().form_valid(form)
+    form.instance.user = self.request.user 
+    response=super().form_valid(form)
+    print(self.object.id)
+
+    photo_file = self.request.FILES.get('photo-file', None)
+    if photo_file:
+      s3 = boto3.client('s3')
+      key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f'{S3_BASE_URL}{BUCKET}/{key}'
+      photo = Photo(url=url, post_id=self.object.id)
+      photo.save()
+    except Exception as error:
+      print('An error occured uploading an image')
+      print(error)
+    return response
+
+
+  
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
   model = Post

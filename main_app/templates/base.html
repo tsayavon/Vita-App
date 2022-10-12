@@ -33,7 +33,7 @@
             {% if user.is_authenticated %}
             <li><a href="{% url 'posts_create' %}">Add a Post</a></li>
             <li><a href="{% url 'index' %}">Gallery</a></li>
-            <li><a href="/categories">Categories</a></li>
+            {% comment %} <li><a href="/categories">Categories</a></li> {% endcomment %}
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
             <li><a href="{% url 'signup' %}">Sign Up</a></li>
