@@ -24,11 +24,15 @@
         <div
           class="d-flex align-items-center h-custom-4 px-5 ms-xl-4 mt-0 pt-0 pt-xl-0 mt-xl-n5"
         >
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <table>
             {{ form.as_table }}
           </table>
+          <div class="form-group m-3">
+            <label>Upload image</label>
+            <input required name="photo-file" type="file" multiple class="form-control-file">
+          </div>
           <input type="submit" value="Submit" class="btn" />
         </form>
         </div>
