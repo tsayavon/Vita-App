@@ -7,9 +7,9 @@
     <div class="row gx-4 gx-lg-5 align-items-center">
       <div>
       {% if object %}
-      <h1>Edit <span class="teal-text">{{object.title}}</span></h1>
+      <h1 style="font-family: 'Montserrat', sans-serif;">Edit <span class="teal-text">{{object.title}}</span></h1>
       {% else %}
-      <h1 style="margin-left: 70px;">Add Post</h1>
+      <h1 style="margin-left: 70px; font-family: 'Montserrat', sans-serif;">Add Post</h1>
       {% endif %}
       </div>
       <div class="col-sm-6 px-0 d-none d-sm-block">
@@ -38,14 +38,14 @@
         >
         <form action="" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          <table>
+          <table style="font-family: 'Hind', sans-serif;">
             {{ form.as_table }}
           </table>
           <div class="form-group m-3">
             <label>Upload image</label>
             <input required name="photo-file" type="file" multiple class="form-control-file">
           </div>
-          <input type="submit" value="Submit" class="btn" />
+          <input type="submit" value="Submit" class="btn" style="font-family: 'Hind', sans-serif;" />
         </form>
         </div>
       </div>

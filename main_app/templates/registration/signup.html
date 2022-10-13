@@ -8,7 +8,7 @@
     <div class="container px-4 px-lg-5 my-5">
       <div class="row gx-4 gx-lg-5 align-items-center">
         <div style="margin-top: 40px; margin-bottom: -50px; margin-left: 690px;">
-        <h1>Sign Up</h1>
+        <h1 style="font-family: 'Montserrat', sans-serif;">Sign Up</h1>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
           <img
@@ -22,7 +22,7 @@
           <div
             class="d-flex align-items-center h-custom-4 px-5 ms-xl-4 mt-0 pt-0 pt-xl-0 mt-xl-n5"
           >
-          <form method="post" action="{% url 'signup' %}">
+          <form style="font-family: 'Hind', sans-serif;" method="post" action="{% url 'signup' %}">
             {% csrf_token %} {{ form.as_p }}
             <input type="submit" class="btn" value="signup" />
         </form>
