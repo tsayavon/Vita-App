@@ -109,6 +109,28 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
   model = Post
   fields = ('title', 'location', 'description')
 
+  def form_valid(self, form):
+    form.instance.user = self.request.user 
+    response=super().form_valid(form)
+    print(self.object.id)
+
+    photo_file = self.request.FILES.get('photo-file', None)
+    if photo_file:
+      s3 = boto3.client('s3')
+      key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f'{S3_BASE_URL}{BUCKET}/{key}'
+      photo = Photo(url=url, post_id=self.object.id)
+      photo.save()
+    except Exception as error:
+      print('An error occured uploading an image')
+      print(error)
+    return response
+
 class PostDelete(LoginRequiredMixin, DeleteView):
   model = Post
   success_url = '/posts/'
+
+
