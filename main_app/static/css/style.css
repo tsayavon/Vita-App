@@ -12,3 +12,12 @@ body {
     padding-top: 0;
     text-align: right;
   }
+
+.row {
+    display: flex;
+  }
+
+.column {
+    flex: 33.33%;
+    padding: 5px;
+  }

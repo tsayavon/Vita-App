@@ -10,8 +10,8 @@
           </h4>
           <form action="" method="POST">
             {% csrf_token %}
-            <input type="submit" value="Yes - Delete!" class="btn" />
-            <a href="{% url 'detail' post.id %}">Cancel</a>
+            <input type="submit" value="Yes - Delete!" class="btn btn-danger" />
+            <a class="btn btn-warning" href="{% url 'detail' post.id %}">Cancel</a>
           </form>
       </div>
       <div class="col-sm-6 px-0 d-none d-sm-block">

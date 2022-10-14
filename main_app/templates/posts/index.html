@@ -1,18 +1,23 @@
-
 {% extends 'base.html' %} {% block content %}
 
 <h1>Your Photo Album</h1>
 
-{% for post in posts %}
-<div class="card">
-  <a href="{% url 'detail' post.id %}"> 
-    <div class="card-content">
-    <span class="card-title">{{ post.title }}</span>
-    {% for photo in post.photo_set.all %}
-    <img src="{{ photo.url }}" alt="{{ post.name }}" class="card-panel responsive-img" />
-    {% empty %}
-    <div class="card-panel teal-text">No Photos Uploaded Yet</div>
+<div class="w-3 container h2">  
+  <div class="row">
+    {% for post in posts %}
+    <div class="card col-md-5 me-4">
+      <a style="text-decoration:none; color:black;" href="{% url 'detail' post.id %}"> 
+        <div class="card-content">
+        <span class="card-title">{{ post.title }}</span>
+        {% for photo in post.photo_set.all %}
+        <img src="{{ photo.url }}" alt="{{ post.name }}" class="card-panel responsive-img w-100" />
+        {% empty %}
+        <div class="card-panel teal-text">No Photos Uploaded Yet</div>
+        {% endfor %}
+        </div>
+      </a>
+    </div>
     {% endfor %}
-  </a>
+  </div>
 </div>
-{% endfor %} {% endblock %}
+ {% endblock %}
